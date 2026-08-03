@@ -24,7 +24,7 @@
    SECTION 1 — Constants & App State
    ═══════════════════════════════════════════════════════════════════════ */
 
-const CREDENTIALS = { username: 'admin', password: 'mitchell2026' };
+const CREDENTIALS = { username: 'admin', password: 'admin123' };
 const SESSION_KEY  = 'msm_session';
 const SESSION_TTL  = 8 * 60 * 60 * 1000; // 8 hours
 
