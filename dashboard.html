@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CMS Dashboard — Mrs. Sarah Mitchell</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+  <!-- ===================================================================
+       LOGIN SCREEN
+       Protected authentication screen
+  =================================================================== -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="login-brand-dot"></span>
+        <span class="login-brand-name">Mrs. Sarah Mitchell</span>
+      </div>
+
+      <h1 class="login-title">Content Management</h1>
+      <p class="login-sub">Sign in to manage your educational articles and resources.</p>
+
+      <div class="login-error" id="login-error"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-username">Username</label>
+          <input class="form-input" type="text" id="login-username" placeholder="admin" required />
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label class="form-label" for="login-password">Password</label>
+          <input class="form-input" type="password" id="login-password" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 10px;">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ===================================================================
+       DASHBOARD APP LAYOUT (SPA)
+  =================================================================== -->
+  <div id="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="sidebar-brand-d  ot"></span>
+        <span class="sidebar-brand-name">Mrs. Sarah Mitchell<br /><span style="font-family:var(--f-sans);font-size:0.72rem;color:var(--c-text-3);font-weight:400;">Content Manager</span></span>
+      </div>
+
+      <div class="sidebar-section-label">Navigation</div>
+      
+      <button class="nav-item active" data-view="overview">
+        <span class="nav-item-icon">📊</span>
+        <span>Overview</span>
+      </button>
+
+      <button class="nav-item" data-view="articles">
+        <span class="nav-item-icon">📝</span>
+        <span>Articles</span>
+      </button>
+
+      <button class="nav-item" data-view="article-new">
+        <span class="nav-item-icon">➕</span>
+        <span>New Article</span>
+      </button>
+
+      <button class="nav-item" data-view="categories">
+        <span class="nav-item-icon">🏷️</span>
+        <span>Categories</span>
+      </button>
+
+      <button class="nav-item" data-view="images">
+        <span class="nav-item-icon">🖼️</span>
+        <span>Media Library</span>
+      </button>
+
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" title="Open Public Website">
+          <span>🌐 View Public Site</span>
+        </a>
+        <button class="logout-btn" id="logout-btn" title="Sign out of CMS">
+          <span>🚪 Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main-area">
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <h1 class="topbar-title" id="topbar-title">Dashboard</h1>
+        <div class="topbar-actions" id="topbar-actions"></div>
+      </header>
+
+      <!-- DYNAMIC CONTENT VIEW -->
+      <main class="content-area" id="content-area">
+        <!-- Rendered by dashboard.js -->
+      </main>
+    </div>
+
+  </div>
+
+
+  <!-- ===================================================================
+       MODAL DIALOG CONTAINER
+  =================================================================== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Modal Title</h3>
+        <button class="modal-close" id="modal-close-btn" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer" id="modal-footer"></div>
+    </div>
+  </div>
+
+
+  <!-- TOAST STACK -->
+  <div class="toast-stack" id="toast-stack"></div>
+
+
+  <!-- ===================================================================
+       SCRIPTS
+       store.js (data layer) -> articles.js -> dashboard.js
+  =================================================================== -->
+  <script src="js/articles.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/dashboard.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bu Khusnul Khotimah - Guru Matematika</title>
+  <meta name="description" content="Personal site of Mrs. Sarah Mitchell, middle school mathematics teacher for Grades 7–9. Educational articles on algebra, geometry, statistics, and learning strategies." />
+  <meta name="author" content="Mrs. Sarah Mitchell" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav-inner">
+
+        <a href="#hero" class="nav-logo">
+          <span class="nav-logo-dot"></span>
+          Bu. Khusnul Matematika
+        </a>
+
+        <button class="nav-mobile-btn" id="nav-mobile-btn" aria-label="Toggle menu">☰</button>
+
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#hero"      class="nav-link active">Home</a></li>
+          <li><a href="#articles"  class="nav-link">Articles</a></li>
+          <li><a href="#resources" class="nav-link">Resources</a></li>
+          <li><a href="#about"     class="nav-link">About</a></li>
+          <li><a href="#contact"   class="nav-link">Contact</a></li>
+        </ul>
+
+      </nav>
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 1 — HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+
+          <!-- Left: introduction -->
+          <div class="hero-text">
+
+            <div class="hero-eyebrow">
+              <span class="hero-role-text">Mathematics Teacher</span>
+              <span class="hero-sep"></span>
+              <span class="hero-role-text">Educator</span>
+              <span class="hero-sep"></span>
+              <span class="hero-role-text">Writer</span>
+            </div>
+
+            <h1 class="hero-heading">
+              Making Mathematics easier to understand
+              and <span class="italic-accent">enjoyable</span> to learn.
+            </h1>
+
+            <p class="hero-intro">
+              Halo, saya <strong>Bu Khusnul Khotimah</strong>, seorang guru Sekolah Menengah Pertama (SMP) yang berkomitmen untuk mendukung perkembangan akademik dan karakter peserta didik. Saya percaya bahwa pendidikan bukan hanya tentang memperoleh pengetahuan, tetapi juga tentang membangun kemampuan berpikir kritis, kreativitas, rasa percaya diri, serta nilai-nilai yang akan menjadi bekal mereka di masa depan. Melalui situs ini, saya berbagi materi pembelajaran, pengalaman mengajar, serta berbagai artikel pendidikan yang diharapkan dapat membantu siswa belajar dengan lebih efektif, menyenangkan, dan penuh semangat.
+            </p>
+            <div class="hero-cta">
+              <a href="#articles" class="btn btn--primary">Read My Articles</a>
+              <a href="#about"    class="btn btn--outline">About Me</a>
+            </div>
+
+          </div>
+
+          <!-- Right: portrait + stats -->
+          <div class="hero-photo-col">
+            <div class="hero-photo-frame">
+              <img src="images/bu_khusnul_portrait.png" alt="Bu Khusnul Khotimah, Guru Matematika" />
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <span class="hero-stat-val">10+</span>
+                <span class="hero-stat-lbl">Years Teaching</span>
+              </div>
+              <div class="hero-stat">
+                <span class="hero-stat-val">3</span>
+                <span class="hero-stat-lbl">Grade Levels</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 2 — EDITORIAL ARTICLE LAYOUT
+         Featured · Latest · Popular
+         All content rendered from js/articles.js
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="articles">
+      <div class="container">
+
+        <!-- Section header -->
+        <div style="margin-bottom: var(--s5);">
+          <span class="eyebrow">Writing & Insights</span>
+          <h2 class="section-heading">Latest Educational Articles</h2>
+          <p class="section-lead">Carefully written guides and classroom reflections designed for middle school learners, parents, and fellow educators.</p>
+        </div>
+
+        <hr class="rule" style="margin-top: 0;" />
+
+        <!-- Three-column editorial grid -->
+        <div class="editorial-grid">
+
+          <!-- LEFT: Latest articles (rendered by main.js) -->
+          <div class="editorial-latest" id="latest-articles">
+            <!-- Populated from articles.js via main.js -->
+          </div>
+
+          <!-- CENTER: Featured article (rendered by main.js) -->
+          <div class="editorial-feature" id="featured-article">
+            <!-- Populated from articles.js via main.js -->
+          </div>
+
+          <!-- RIGHT: Popular articles (rendered by main.js) -->
+          <div class="editorial-popular">
+            <p class="popular-label">Popular Articles</p>
+            <div id="popular-articles">
+              <!-- Populated from articles.js via main.js -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 3 — ARTICLE GRID (Learning Resources)
+         Filtered by topic chips from Section 4
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="resources-section">
+      <div class="container">
+
+        <div style="margin-bottom: var(--s4);">
+          <span class="eyebrow">Teaching Materials</span>
+          <h2 class="section-heading">Learning Resources</h2>
+          <p class="section-lead">Browse subject guides and study articles for Grades 7, 8, and 9. Use the topic filters below to narrow by subject.</p>
+        </div>
+
+        <div class="article-grid" id="article-grid">
+          <!-- Populated from articles.js via main.js -->
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 4 — TEACHING TOPICS
+         Chips rendered dynamically from article tags
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="resources">
+      <div class="container">
+
+        <div style="margin-bottom: var(--s4);">
+          <span class="eyebrow">Topics & Curriculum</span>
+          <h2 class="section-heading">Teaching Topics</h2>
+          <p class="section-lead">Select a topic to filter articles and resources by subject area or grade level.</p>
+        </div>
+
+        <!-- Topic filter chips — built dynamically from article tags in main.js -->
+        <div class="topics-bar" id="topics-bar">
+          <!-- Populated by main.js -->
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 5 — ABOUT MY TEACHING
+    ═══════════════════════════════════════════ -->
+    <section class="section" id="about">
+      <div class="container">
+
+        <!-- Philosophy & Photo -->
+        <div class="about-layout">
+
+          <div class="about-col">
+            <div>
+              <span class="eyebrow">Philosophy & Values</span>
+              <h2 class="section-heading">About My Teaching</h2>
+            </div>
+
+            <div class="philosophy-pull">
+              <blockquote>
+                "Mathematics is not a spectator sport. It is an active journey of curiosity, discovery, and resilience."
+              </blockquote>
+              <cite>— Mrs. Sarah Mitchell</cite>
+            </div>
+
+            <p style="font-size: 1rem; color: var(--text-2); line-height: 1.75;">
+              My mission as a middle school mathematics educator is to create a classroom where students feel safe to ask questions, to make mistakes, and to persist through difficulty. I believe that every student is capable of mathematical thinking — the role of a teacher is to help them believe that too.
+            </p>
+
+            <div class="values-row">
+              <div class="value-col">
+                <span class="value-label">Mission</span>
+                <p class="value-text">To make mathematics accessible, relevant, and genuinely inspiring for every student.</p>
+              </div>
+              <div class="value-col">
+                <span class="value-label">Approach</span>
+                <p class="value-text">Visual representations, hands-on activities, and grounding abstract ideas in real-world context.</p>
+              </div>
+              <div class="value-col">
+                <span class="value-label">Values</span>
+                <p class="value-text">Patience, encouragement, a growth mindset, and the belief that curiosity is a skill to be cultivated.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-photo">
+            <img src="images/classroom_teaching.png" alt="Mrs. Sarah Mitchell teaching a class" />
+          </div>
+
+        </div>
+
+        <!-- Timeline -->
+        <div style="max-width: 720px; margin: 0 auto;">
+          <p class="timeline-title">Education & Professional Journey</p>
+
+          <div class="timeline">
+
+            <div class="tl-item">
+              <div class="tl-year">2018 – Present</div>
+              <div class="tl-line"></div>
+              <div class="tl-body">
+                <span class="tl-tag">Experience</span>
+                <h4 class="tl-role">Senior Mathematics Educator, Grades 7–9</h4>
+                <div class="tl-place">Lincoln Middle School</div>
+                <p class="tl-desc">Leading Algebra and Geometry curricula, mentoring junior teachers, and organizing the annual STEM Mathematics Fair.</p>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-year">2022</div>
+              <div class="tl-line"></div>
+              <div class="tl-body">
+                <span class="tl-tag">Achievement</span>
+                <h4 class="tl-role">Excellence in STEM Teaching Award</h4>
+                <div class="tl-place">State Education Association</div>
+                <p class="tl-desc">Recognized for innovative visual learning materials and inquiry-based geometry teaching methods.</p>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-year">2014 – 2016</div>
+              <div class="tl-line"></div>
+              <div class="tl-body">
+                <span class="tl-tag">Education</span>
+                <h4 class="tl-role">Master of Education (M.Ed.) — Mathematics</h4>
+                <div class="tl-place">State Teachers University</div>
+                <p class="tl-desc">Specialized in adolescent cognitive development and visual mathematical pedagogy.</p>
+              </div>
+            </div>
+
+            <div class="tl-item">
+              <div class="tl-year">2010 – 2014</div>
+              <div class="tl-line"></div>
+              <div class="tl-body">
+                <span class="tl-tag">Education</span>
+                <h4 class="tl-role">B.Sc. Mathematics with Education (Honors)</h4>
+                <div class="tl-place">University of Science &amp; Arts</div>
+                <p class="tl-desc">Graduated Summa Cum Laude. President of the Student Mathematics Society.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         SECTION 6 — CONTACT
+    ═══════════════════════════════════════════ -->
+    <section class="section section--alt" id="contact">
+      <div class="container">
+
+        <div style="margin-bottom: var(--s5);">
+          <span class="eyebrow">Get In Touch</span>
+          <h2 class="section-heading">Let's Connect</h2>
+        </div>
+
+        <div class="contact-grid">
+
+          <!-- Left: intro + channels -->
+          <div>
+            <p class="contact-intro">
+              Feel free to reach out if you have questions about mathematics learning, educational collaboration, or teaching discussions.
+            </p>
+
+            <div class="channels">
+
+              <div class="channel">
+                <div class="channel-icon-wrap">✉️</div>
+                <div>
+                  <div class="channel-label">Email</div>
+                  <div class="channel-val">sarah.mitchell@education.org</div>
+                </div>
+              </div>
+
+              <div class="channel">
+                <div class="channel-icon-wrap">💬</div>
+                <div>
+                  <div class="channel-label">WhatsApp</div>
+                  <div class="channel-val">+1 (555) 234-5678</div>
+                </div>
+              </div>
+
+              <div class="channel">
+                <div class="channel-icon-wrap">📸</div>
+                <div>
+                  <div class="channel-label">Instagram</div>
+                  <div class="channel-val">@mrs.mitchell.math</div>
+                </div>
+              </div>
+
+              <div class="channel">
+                <div class="channel-icon-wrap">🏫</div>
+                <div>
+                  <div class="channel-label">School</div>
+                  <div class="channel-val">Lincoln Middle School, STEM Department</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right: contact form -->
+          <div class="contact-form-col">
+            <h3 class="contact-form-title">Send a Message</h3>
+
+            <form id="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Your Name</label>
+                <input class="form-input" type="text" id="contact-name" placeholder="Eleanor Vance" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email Address</label>
+                <input class="form-input" type="email" id="contact-email" placeholder="eleanor@example.com" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-subject">Subject</label>
+                <input class="form-input" type="text" id="contact-subject" placeholder="Collaboration · Tutoring · General inquiry" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-message">Message</label>
+                <textarea class="form-textarea" id="contact-message" placeholder="Share your question or message here…" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary" style="width:100%;">Send Message</button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-inner">
+
+        <span class="footer-logo">Mrs. Sarah Mitchell</span>
+
+        <ul class="footer-nav">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#articles">Articles</a></li>
+          <li><a href="#resources">Resources</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="footer-social">
+          <a href="#" class="soc-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="soc-btn" aria-label="LinkedIn">💼</a>
+          <a href="#" class="soc-btn" aria-label="Email">✉️</a>
+        </div>
+
+      </div>
+
+      <p class="footer-copy">
+        © 2026 Mrs. Sarah Mitchell. Written with care for students, parents, and educators.
+      </p>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       ARTICLE MODAL READER
+  ═══════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="article-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-panel">
+      <button class="modal-close" id="modal-close" aria-label="Close article">✕</button>
+      <img id="modal-cover" class="modal-cover" src="" alt="" />
+      <div class="modal-body">
+        <div class="modal-meta" id="modal-meta"></div>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-content" id="modal-content"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS
+       articles.js must load before main.js
+  ═══════════════════════════════════════════ -->
+  <script src="js/articles.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
