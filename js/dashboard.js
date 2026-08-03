@@ -620,7 +620,10 @@ function openAddCategoryModal() {
         closeModal();
         await rebuildCategoryTable();
         toast('Kategori ditambahkan.', 'success');
-      } catch (e) { toast('Gagal menambah kategori.', 'error'); }
+      } catch (e) {
+        console.error('Tambah kategori error:', e);
+        toast('Gagal menambah kategori.', 'error');
+      }
     }},
   ]);
   document.getElementById('cat-name-input').addEventListener('input', e => {
@@ -652,7 +655,10 @@ function openEditCategoryModal(id) {
           closeModal();
           await rebuildCategoryTable();
           toast('Kategori diperbarui.', 'success');
-        } catch (e) { toast('Gagal memperbarui kategori.', 'error'); }
+        } catch (e) {
+          console.error('Edit kategori error:', e);
+          toast('Gagal memperbarui kategori.', 'error');
+        }
       }},
     ]);
   });
@@ -664,7 +670,10 @@ function confirmDeleteCategory(id, name) {
       await Categories.remove(id);
       await rebuildCategoryTable();
       toast('Kategori dihapus.', 'success');
-    } catch (e) { toast('Gagal menghapus kategori.', 'error'); }
+    } catch (e) {
+      console.error('Hapus kategori error:', e);
+      toast('Gagal menghapus kategori.', 'error');
+    }
   });
 }
 

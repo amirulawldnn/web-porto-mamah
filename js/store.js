@@ -61,30 +61,38 @@ class FirestoreStore {
     this.col = collectionName;
   }
 
-  /** Returns all documents ordered by createdAt desc */
+  /** Returns all documents sorted by createdAt desc safely in memory */
   async getAll() {
     try {
-      const snap = await db.collection(this.col)
-        .orderBy('createdAt', 'desc')
-        .get();
-      return snap.docs.map(d => ({ ...d.data(), id: d.id }));
-    } catch (err) {
-      // If index not ready, fall back to unordered
       const snap = await db.collection(this.col).get();
-      return snap.docs.map(d => ({ ...d.data(), id: d.id }));
+      const items = snap.docs.map(d => ({ ...d.data(), id: d.id }));
+      items.sort((a, b) => {
+        const da = a.createdAt ? new Date(a.createdAt) : 0;
+        const db_ = b.createdAt ? new Date(b.createdAt) : 0;
+        return db_ - da;
+      });
+      return items;
+    } catch (err) {
+      console.error(`FirestoreStore.getAll error for ${this.col}:`, err);
+      return [];
     }
   }
 
   /** Fetch a single document by id */
   async getById(id) {
-    const doc = await db.collection(this.col).doc(id).get();
-    return doc.exists ? { ...doc.data(), id: doc.id } : null;
+    try {
+      const doc = await db.collection(this.col).doc(id).get();
+      return doc.exists ? { ...doc.data(), id: doc.id } : null;
+    } catch (err) {
+      console.error(`FirestoreStore.getById error for ${this.col}/${id}:`, err);
+      return null;
+    }
   }
 
   /** Insert a new document. Uses provided id or auto-generates one. */
   async add(item) {
     const id   = item.id || storeGenId();
-    const data = { ...item, id };
+    const data = { ...item, id, createdAt: item.createdAt || todayISO() };
     await db.collection(this.col).doc(id).set(data);
     return data;
   }
@@ -259,7 +267,7 @@ async function seedCategoriesFromDefault() {
   const batch = db.batch();
   DEFAULT_CATEGORIES.forEach(c => {
     const ref = db.collection(COLLECTIONS.CATEGORIES).doc(c.id);
-    batch.set(ref, c);
+    batch.set(ref, { ...c, createdAt: todayISO() });
   });
   await batch.commit();
   console.log('[Store] Seeded default categories to Firestore.');
