@@ -1,7 +1,7 @@
-/**
- * dashboard.js — CMS Application Controller
+﻿/**
+ * dashboard.js â€” CMS Application Controller
  * ==========================================
- * Single-page admin app for Mrs. Sarah Mitchell's educational portfolio.
+ * Single-page admin app for Bu Khusnul Khotimah's educational portfolio.
  * Requires: store.js (loaded before this file)
  *
  * Access URL: /dashboard.html  (not linked from public site)
@@ -10,19 +10,19 @@
  *   Password: mitchell2026
  *
  * Architecture:
- *   AUTH     — login/logout/session
- *   ROUTER   — hash-based view routing
- *   VIEWS    — overview, articles, article editor, categories, images
- *   RTE      — rich text editor (contenteditable + execCommand)
- *   MODALS   — confirm, image picker, add category
- *   TOAST    — notification system
+ *   AUTH     â€” login/logout/session
+ *   ROUTER   â€” hash-based view routing
+ *   VIEWS    â€” overview, articles, article editor, categories, images
+ *   RTE      â€” rich text editor (contenteditable + execCommand)
+ *   MODALS   â€” confirm, image picker, add category
+ *   TOAST    â€” notification system
  */
 
 'use strict';
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 1 — Constants & App State
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 1 â€” Constants & App State
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 const CREDENTIALS = { username: 'admin', password: 'admin123' };
 const SESSION_KEY  = 'msm_session';
@@ -37,9 +37,9 @@ let AppState = {
   pickerCb:    null,   // callback for image picker
 };
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 2 — Auth
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 2 â€” Auth
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function isLoggedIn() {
   try {
@@ -63,9 +63,9 @@ function doLogout() {
   showLoginScreen();
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 3 — Screen Switching
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 3 â€” Screen Switching
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function showLoginScreen() {
   document.getElementById('login-screen').style.display = 'flex';
@@ -81,9 +81,9 @@ function showApp() {
   router();
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 4 — Router
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 4 â€” Router
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function router() {
   const hash  = location.hash.slice(1) || 'overview';
@@ -114,16 +114,16 @@ function navigate(path) {
   location.hash = path;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 5 — Utility
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 5 â€” Utility
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function escHtml(str) {
   return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function fmtDate(iso) {
-  if (!iso) return '—';
+  if (!iso) return 'â€”';
   const d = new Date(iso + 'T00:00:00');
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
@@ -137,9 +137,9 @@ function setTopbar(title, actionsHtml = '') {
   document.getElementById('topbar-actions').innerHTML   = actionsHtml;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 6 — Overview View
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 6 â€” Overview View
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function renderOverview() {
   setTopbar('Dashboard');
@@ -192,13 +192,13 @@ function renderOverview() {
         </thead>
         <tbody>
           ${recent.length === 0
-            ? `<tr><td colspan="5" class="table-empty">No articles yet. <button class="btn btn-ghost btn-sm" onclick="navigate('#article-new')">Create your first →</button></td></tr>`
+            ? `<tr><td colspan="5" class="table-empty">No articles yet. <button class="btn btn-ghost btn-sm" onclick="navigate('#article-new')">Create your first â†’</button></td></tr>`
             : recent.map(a => `
               <tr>
                 <td style="display:flex;align-items:center;gap:12px;">
                   ${a.coverImage
                     ? `<img class="table-thumb" src="${escHtml(a.coverImage)}" alt="" onerror="this.style.display='none'">`
-                    : `<div class="table-thumb" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;">📄</div>`}
+                    : `<div class="table-thumb" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;">ðŸ“„</div>`}
                   <div>
                     <div class="table-title">${escHtml(a.title)}</div>
                     <div class="table-excerpt">${escHtml(a.excerpt)}</div>
@@ -208,7 +208,7 @@ function renderOverview() {
                 <td><span class="badge ${a.status === 'published' ? 'badge-published' : 'badge-draft'}">${a.status}</span></td>
                 <td class="text-muted">${fmtDate(a.publishDate)}</td>
                 <td class="table-actions">
-                  <button class="btn btn-ghost btn-sm btn-icon" onclick="navigate('#article-edit/${escHtml(a.id)}')" title="Edit">✎</button>
+                  <button class="btn btn-ghost btn-sm btn-icon" onclick="navigate('#article-edit/${escHtml(a.id)}')" title="Edit">âœŽ</button>
                 </td>
               </tr>
             `).join('')}
@@ -217,14 +217,14 @@ function renderOverview() {
     </div>
 
     ${all.length > 6 ? `<div style="text-align:center;padding:16px 0;">
-      <button class="btn btn-outline btn-sm" onclick="navigate('#articles')">View all ${all.length} articles →</button>
+      <button class="btn btn-outline btn-sm" onclick="navigate('#articles')">View all ${all.length} articles â†’</button>
     </div>` : ''}
   `);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 7 — Article List View
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 7 â€” Article List View
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function renderArticleList() {
   setTopbar('Articles', `
@@ -239,7 +239,7 @@ function renderArticleList() {
         class="form-input filter-search"
         id="art-search"
         type="search"
-        placeholder="Search articles…"
+        placeholder="Search articlesâ€¦"
         value="${escHtml(AppState.artFilter.search)}"
       />
       <select class="form-select" id="art-cat-filter" style="width:auto;">
@@ -311,7 +311,7 @@ function refreshArticleListBody() {
       <td style="display:flex;align-items:center;gap:12px;min-width:260px;">
         ${a.coverImage
           ? `<img class="table-thumb" src="${escHtml(a.coverImage)}" alt="" onerror="this.style.display='none'">`
-          : `<div class="table-thumb" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--c-bg);">📄</div>`}
+          : `<div class="table-thumb" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:var(--c-bg);">ðŸ“„</div>`}
         <div>
           <div class="table-title">${escHtml(a.title)}</div>
           <div class="table-excerpt">${escHtml(a.excerpt)}</div>
@@ -320,13 +320,13 @@ function refreshArticleListBody() {
       <td><span class="cat ${escHtml(a.catClass)}">${escHtml(a.category)}</span></td>
       <td><span class="badge ${a.status === 'published' ? 'badge-published' : 'badge-draft'}">${a.status}</span></td>
       <td style="white-space:nowrap;font-size:0.75rem;color:var(--c-text-3);">
-        ${a.featured ? '⭐ Featured ' : ''}${a.popular ? '🔥 Popular ' : ''}${a.latest ? '🆕 Latest' : ''}
+        ${a.featured ? 'â­ Featured ' : ''}${a.popular ? 'ðŸ”¥ Popular ' : ''}${a.latest ? 'ðŸ†• Latest' : ''}
       </td>
       <td class="text-muted">${fmtDate(a.publishDate)}</td>
       <td class="table-actions">
-        <button class="btn btn-ghost btn-sm btn-icon" onclick="navigate('#article-edit/${escHtml(a.id)}')" title="Edit">✎</button>
-        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleArticleStatus('${escHtml(a.id)}')" title="${a.status === 'published' ? 'Unpublish' : 'Publish'}">${a.status === 'published' ? '⏸' : '▶'}</button>
-        <button class="btn btn-ghost btn-sm btn-icon" style="color:var(--c-danger);" onclick="confirmDeleteArticle('${escHtml(a.id)}')" title="Delete">🗑</button>
+        <button class="btn btn-ghost btn-sm btn-icon" onclick="navigate('#article-edit/${escHtml(a.id)}')" title="Edit">âœŽ</button>
+        <button class="btn btn-ghost btn-sm btn-icon" onclick="toggleArticleStatus('${escHtml(a.id)}')" title="${a.status === 'published' ? 'Unpublish' : 'Publish'}">${a.status === 'published' ? 'â¸' : 'â–¶'}</button>
+        <button class="btn btn-ghost btn-sm btn-icon" style="color:var(--c-danger);" onclick="confirmDeleteArticle('${escHtml(a.id)}')" title="Delete">ðŸ—‘</button>
       </td>
     </tr>
   `).join('');
@@ -355,9 +355,9 @@ function confirmDeleteArticle(id) {
   );
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 8 — Article Editor View
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 8 â€” Article Editor View
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function renderArticleEditor(id) {
   const art  = id ? Articles.getById(id) : null;
@@ -367,7 +367,7 @@ function renderArticleEditor(id) {
   setTopbar(
     isNew ? 'New Article' : 'Edit Article',
     `
-      <button class="btn btn-outline btn-sm" onclick="navigate('#articles')">← Back</button>
+      <button class="btn btn-outline btn-sm" onclick="navigate('#articles')">â† Back</button>
       <button class="btn btn-outline btn-sm" id="btn-save-draft">Save Draft</button>
       <button class="btn btn-primary btn-sm" id="btn-publish">Publish</button>
     `
@@ -387,7 +387,7 @@ function renderArticleEditor(id) {
             class="form-input title-input"
             type="text"
             id="f-title"
-            placeholder="Article title…"
+            placeholder="Article titleâ€¦"
             value="${escHtml(art?.title || '')}"
             autocomplete="off"
           />
@@ -414,7 +414,7 @@ function renderArticleEditor(id) {
               class="form-textarea"
               id="f-excerpt"
               rows="2"
-              placeholder="A brief summary shown on article cards and search results…"
+              placeholder="A brief summary shown on article cards and search resultsâ€¦"
             >${escHtml(art?.excerpt || '')}</textarea>
           </div>
 
@@ -426,7 +426,7 @@ function renderArticleEditor(id) {
                 class="form-input"
                 type="text"
                 id="f-cover"
-                placeholder="Image URL or path…"
+                placeholder="Image URL or pathâ€¦"
                 value="${escHtml(art?.coverImage || '')}"
                 style="flex:1;"
               />
@@ -471,7 +471,7 @@ function renderArticleEditor(id) {
             <div class="form-group">
               <label class="form-label">Category</label>
               <select class="form-select" id="f-category">
-                <option value="">— Select —</option>
+                <option value="">â€” Select â€”</option>
                 ${cats.map(c => `<option value="${escHtml(c.name)}" ${art?.category === c.name ? 'selected' : ''}>${escHtml(c.name)}</option>`).join('')}
               </select>
             </div>
@@ -531,7 +531,7 @@ function renderArticleEditor(id) {
             <div class="form-group" style="margin-bottom:0;">
               <label class="form-label">Meta Description</label>
               <textarea class="form-textarea" id="f-seo-desc" rows="3"
-                        placeholder="Brief description for search engines…">${escHtml(art?.seoDescription || '')}</textarea>
+                        placeholder="Brief description for search enginesâ€¦">${escHtml(art?.seoDescription || '')}</textarea>
             </div>
           </div>
 
@@ -539,7 +539,7 @@ function renderArticleEditor(id) {
           <div class="section-card" style="padding:12px 16px;">
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <span class="text-muted">Estimated Read Time</span>
-              <span id="read-time-display" style="font-weight:600;font-size:0.88rem;">${art?.readingTime || '—'}</span>
+              <span id="read-time-display" style="font-weight:600;font-size:0.88rem;">${art?.readingTime || 'â€”'}</span>
             </div>
           </div>
 
@@ -606,7 +606,7 @@ function collectArticleForm(status) {
     readingTime:    calcReadTime(content),
     seoTitle:       document.getElementById('f-seo-title').value.trim(),
     seoDescription: document.getElementById('f-seo-desc').value.trim(),
-    author:         'Mrs. Sarah Mitchell',
+    author:         'Bu Khusnul Khotimah',
     updatedAt:      todayISO(),
   };
 }
@@ -627,9 +627,9 @@ function saveArticle(status) {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 9 — Categories View
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 9 â€” Categories View
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function renderCategories() {
   setTopbar('Categories', `
@@ -656,8 +656,8 @@ function rebuildCategoryTable() {
                   <div class="cat-slug">${escHtml(c.slug)}</div>
                   <div class="cat-count">${count} article${count !== 1 ? 's' : ''}</div>
                   <div class="table-actions">
-                    <button class="btn btn-ghost btn-sm btn-icon" onclick="openEditCategoryModal('${escHtml(c.id)}')" title="Edit">✎</button>
-                    <button class="btn btn-ghost btn-sm btn-icon" style="color:var(--c-danger);" onclick="confirmDeleteCategory('${escHtml(c.id)}')" title="Delete">🗑</button>
+                    <button class="btn btn-ghost btn-sm btn-icon" onclick="openEditCategoryModal('${escHtml(c.id)}')" title="Edit">âœŽ</button>
+                    <button class="btn btn-ghost btn-sm btn-icon" style="color:var(--c-danger);" onclick="confirmDeleteCategory('${escHtml(c.id)}')" title="Delete">ðŸ—‘</button>
                   </div>
                 </div>
               `;
@@ -733,9 +733,9 @@ function confirmDeleteCategory(id) {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 10 — Images View
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 10 â€” Images View
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function renderImages() {
   setTopbar('Images');
@@ -744,13 +744,13 @@ function renderImages() {
     <!-- Upload zone -->
     <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-upload-input').click()">
       <div class="upload-zone-title">Click to upload images</div>
-      <div class="upload-zone-sub">PNG, JPG, GIF, WebP — stored locally in your browser</div>
+      <div class="upload-zone-sub">PNG, JPG, GIF, WebP â€” stored locally in your browser</div>
     </div>
     <input type="file" id="file-upload-input" accept="image/*" multiple />
 
     <!-- Add by URL -->
     <div class="url-add-row">
-      <input class="form-input" type="url" id="img-url-input" placeholder="Or paste an image URL…" />
+      <input class="form-input" type="url" id="img-url-input" placeholder="Or paste an image URLâ€¦" />
       <input class="form-input" type="text" id="img-name-input" placeholder="Image name" style="max-width:180px;" />
       <button class="btn btn-outline btn-sm" onclick="addImageByUrl()">Add URL</button>
     </div>
@@ -791,10 +791,10 @@ function refreshImageGrid() {
            onerror="this.style.background='var(--c-bg)'; this.style.height='60px';" />
       <div class="image-card-overlay">
         <button class="btn btn-ghost btn-sm btn-icon" style="color:#fff;background:rgba(255,255,255,0.15);"
-                onclick="copyImageUrl('${escHtml(img.url)}')" title="Copy URL">⎘</button>
+                onclick="copyImageUrl('${escHtml(img.url)}')" title="Copy URL">âŽ˜</button>
         ${img.type !== 'system' ? `
           <button class="btn btn-ghost btn-sm btn-icon" style="color:#ff9999;background:rgba(255,255,255,0.15);"
-                  onclick="confirmDeleteImage('${escHtml(img.id)}')" title="Delete">🗑</button>
+                  onclick="confirmDeleteImage('${escHtml(img.id)}')" title="Delete">ðŸ—‘</button>
         ` : ''}
       </div>
       <div class="image-card-info">
@@ -848,9 +848,9 @@ function confirmDeleteImage(id) {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 11 — Rich Text Editor (RTE)
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 11 â€” Rich Text Editor (RTE)
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function initRTE(wrapper, initialContent) {
   if (!wrapper) return null;
@@ -877,23 +877,23 @@ function initRTE(wrapper, initialContent) {
       <div class="rte-sep"></div>
 
       <!-- Lists -->
-      <button type="button" class="rte-btn" data-cmd="insertUnorderedList" title="Bullet List">≡</button>
+      <button type="button" class="rte-btn" data-cmd="insertUnorderedList" title="Bullet List">â‰¡</button>
       <button type="button" class="rte-btn" data-cmd="insertOrderedList"   title="Numbered List">1.</button>
 
       <div class="rte-sep"></div>
 
       <!-- Alignment -->
-      <button type="button" class="rte-btn" data-cmd="justifyLeft"    title="Align Left">⬡L</button>
-      <button type="button" class="rte-btn" data-cmd="justifyCenter"  title="Align Center">⬡C</button>
-      <button type="button" class="rte-btn" data-cmd="justifyRight"   title="Align Right">⬡R</button>
+      <button type="button" class="rte-btn" data-cmd="justifyLeft"    title="Align Left">â¬¡L</button>
+      <button type="button" class="rte-btn" data-cmd="justifyCenter"  title="Align Center">â¬¡C</button>
+      <button type="button" class="rte-btn" data-cmd="justifyRight"   title="Align Right">â¬¡R</button>
 
       <div class="rte-sep"></div>
 
       <!-- Insert -->
-      <button type="button" class="rte-btn" id="rte-link"  title="Insert Link">🔗 Link</button>
-      <button type="button" class="rte-btn" id="rte-img"   title="Insert Image">📷 Image</button>
-      <button type="button" class="rte-btn" id="rte-table" title="Insert Table">⊞ Table</button>
-      <button type="button" class="rte-btn" id="rte-hr"    title="Horizontal Rule">— Rule</button>
+      <button type="button" class="rte-btn" id="rte-link"  title="Insert Link">ðŸ”— Link</button>
+      <button type="button" class="rte-btn" id="rte-img"   title="Insert Image">ðŸ“· Image</button>
+      <button type="button" class="rte-btn" id="rte-table" title="Insert Table">âŠž Table</button>
+      <button type="button" class="rte-btn" id="rte-hr"    title="Horizontal Rule">â€” Rule</button>
     </div>
 
     <div
@@ -992,9 +992,9 @@ function rteInsertBlock(html) {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 12 — Image Picker Modal
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 12 â€” Image Picker Modal
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /**
  * Open image picker.
@@ -1037,9 +1037,9 @@ function openImagePicker(target) {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 13 — Modal System
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 13 â€” Modal System
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function openModal(title, bodyHtml, buttons = [], large = false) {
   const overlay = document.getElementById('modal-overlay');
@@ -1070,9 +1070,9 @@ function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 14 — Toast Notifications
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 14 â€” Toast Notifications
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function toast(message, type = 'default') {
   const stack = document.getElementById('toast-stack');
@@ -1083,9 +1083,9 @@ function toast(message, type = 'default') {
   setTimeout(() => el.remove(), 3500);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 15 — Login Form Handler
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 15 â€” Login Form Handler
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function setupLogin() {
   const form  = document.getElementById('login-form');
@@ -1107,9 +1107,9 @@ function setupLogin() {
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 16 — Sidebar Nav
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 16 â€” Sidebar Nav
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function setupSidebarNav() {
   document.querySelectorAll('.nav-item[data-view]').forEach(el => {
@@ -1120,9 +1120,9 @@ function setupSidebarNav() {
   document.getElementById('logout-btn').addEventListener('click', doLogout);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
-   SECTION 17 — Init
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SECTION 17 â€” Init
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 document.addEventListener('DOMContentLoaded', () => {
   setupLogin();

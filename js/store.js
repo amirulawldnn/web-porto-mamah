@@ -1,31 +1,31 @@
-/**
- * store.js — Persistent Data Layer for Mrs. Sarah Mitchell CMS
+﻿/**
+ * store.js â€” Persistent Data Layer for Bu Khusnul Khotimah CMS
  * =============================================================
  * Wraps localStorage for Articles, Categories, and Images.
  * Must be loaded AFTER js/articles.js on the dashboard page.
  *
  * Public API:
- *   Articles.getAll()          — all articles (newest first)
+ *   Articles.getAll()          â€” all articles (newest first)
  *   Articles.getById(id)
- *   Articles.add(data)         — returns created article
- *   Articles.update(id, patch) — returns updated article
+ *   Articles.add(data)         â€” returns created article
+ *   Articles.update(id, patch) â€” returns updated article
  *   Articles.remove(id)
  *
- *   Categories / Images — same API
+ *   Categories / Images â€” same API
  *
- *   seedArticlesFromStatic()   — run once on first dashboard visit
+ *   seedArticlesFromStatic()   â€” run once on first dashboard visit
  */
 
 'use strict';
 
-/* ─── Storage Keys ──────────────────────────────────────────────────── */
+/* â”€â”€â”€ Storage Keys â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const STORE_KEYS = {
   ARTICLES:   'msm_articles',
   CATEGORIES: 'msm_categories',
   IMAGES:     'msm_images',
 };
 
-/* ─── Default Categories (seeded on first run) ──────────────────────── */
+/* â”€â”€â”€ Default Categories (seeded on first run) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DEFAULT_CATEGORIES = [
   { id: 'dcat-1', name: 'Algebra',             slug: 'algebra' },
   { id: 'dcat-2', name: 'Geometry',            slug: 'geometry' },
@@ -36,7 +36,7 @@ const DEFAULT_CATEGORIES = [
   { id: 'dcat-7', name: 'Examinations',        slug: 'examinations' },
 ];
 
-/* ─── Default System Images (always available) ──────────────────────── */
+/* â”€â”€â”€ Default System Images (always available) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const SYSTEM_IMAGES = [
   { id: 'simg-1', name: 'Teacher Portrait',   url: 'images/teacher_portrait.png',   type: 'system', addedAt: '2026-08-01' },
   { id: 'simg-2', name: 'Classroom Teaching', url: 'images/classroom_teaching.png', type: 'system', addedAt: '2026-08-01' },
@@ -46,16 +46,16 @@ const SYSTEM_IMAGES = [
   { id: 'simg-6', name: 'Statistics Cover',   url: 'images/article_statistics.png', type: 'system', addedAt: '2026-08-01' },
 ];
 
-/* ═══════════════════════════════════════════════════════════════════════
-   DataStore — Generic localStorage CRUD
-   ═══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   DataStore â€” Generic localStorage CRUD
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 class DataStore {
   constructor(key, defaults = []) {
     this.key      = key;
     this.defaults = defaults;
   }
 
-  /* Internal read — returns parsed array or null on first run */
+  /* Internal read â€” returns parsed array or null on first run */
   _read() {
     try {
       const raw = localStorage.getItem(this.key);
@@ -65,7 +65,7 @@ class DataStore {
     }
   }
 
-  /* Internal write — serializes to localStorage */
+  /* Internal write â€” serializes to localStorage */
   _write(data) {
     try {
       localStorage.setItem(this.key, JSON.stringify(data));
@@ -120,9 +120,9 @@ class DataStore {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    Shared Utility Functions
-   ═══════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 function storeGenId() {
   return 'msm-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -160,11 +160,11 @@ function getCatClass(catName) {
   return MAP[(catName || '').toLowerCase()] || 'cat-algebra';
 }
 
-/* ═══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    First-Run Article Seeding
    Converts static ARTICLES constant (articles.js) to CMS format.
-   Runs only once — subsequent visits use the localStorage copy.
-   ═══════════════════════════════════════════════════════════════════════ */
+   Runs only once â€” subsequent visits use the localStorage copy.
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function seedArticlesFromStatic() {
   if (localStorage.getItem(STORE_KEYS.ARTICLES) !== null) return;
 
@@ -177,7 +177,7 @@ function seedArticlesFromStatic() {
     coverImage:     a.coverImage       || '',
     category:       a.category         || '',
     catClass:       a.catClass         || getCatClass(a.category),
-    author:         a.author           || 'Mrs. Sarah Mitchell',
+    author:         a.author           || 'Bu Khusnul Khotimah',
     publishDate:    a.publishDate      || todayISO(),
     readingTime:    a.readingTime      || '5 min read',
     excerpt:        a.excerpt          || '',
@@ -200,7 +200,7 @@ function todayISO() {
   return new Date().toISOString().slice(0, 10);
 }
 
-/* ─── Store Instances ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Store Instances â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const Articles   = new DataStore(STORE_KEYS.ARTICLES,   []);
 const Categories = new DataStore(STORE_KEYS.CATEGORIES, DEFAULT_CATEGORIES);
 const Images     = new DataStore(STORE_KEYS.IMAGES,     SYSTEM_IMAGES);

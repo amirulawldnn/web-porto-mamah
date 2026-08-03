@@ -1,5 +1,5 @@
-/**
- * main.js — Public Homepage Controller
+﻿/**
+ * main.js â€” Public Homepage Controller
  * =========================================================================
  * Reads article data dynamically:
  * - Automatically seeds localStorage from static ARTICLES if empty on first load.
@@ -13,7 +13,7 @@
 
 'use strict';
 
-/* ─── Data Layer: Retrieve Published Articles with Auto-Seed ──────── */
+/* â”€â”€â”€ Data Layer: Retrieve Published Articles with Auto-Seed â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function seedIfEmpty() {
   try {
@@ -25,7 +25,7 @@ function seedIfEmpty() {
         coverImage:     a.coverImage       || '',
         category:       a.category         || '',
         catClass:       a.catClass         || 'cat-algebra',
-        author:         a.author           || 'Mrs. Sarah Mitchell',
+        author:         a.author           || 'Bu Khusnul Khotimah',
         publishDate:    a.publishDate      || new Date().toISOString().slice(0, 10),
         readingTime:    a.readingTime      || '5 min read',
         excerpt:        a.excerpt          || '',
@@ -70,7 +70,7 @@ function getPublishedArticles() {
   return [];
 }
 
-/* ─── Helpers ─────────────────────────────────────────────────────── */
+/* â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 /** Format ISO date to "Aug 1, 2026" */
 function formatDate(iso) {
@@ -92,7 +92,7 @@ function metaHTML(article) {
   `;
 }
 
-/* ─── Data Selectors ─────────────────────────────────────────────── */
+/* â”€â”€â”€ Data Selectors â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function getFeaturedArticle(articles) {
   return articles.find(a => a.featured) || articles[0];
@@ -122,7 +122,7 @@ function getAllArticlesSorted(articles) {
   return [...articles].sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 }
 
-/* ─── Render: Featured Article (Center Editorial Column) ─────────── */
+/* â”€â”€â”€ Render: Featured Article (Center Editorial Column) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function renderFeaturedArticle(articles) {
   const article = getFeaturedArticle(articles);
@@ -153,7 +153,7 @@ function renderFeaturedArticle(articles) {
   `;
 }
 
-/* ─── Render: Latest Articles (Left Editorial Column) ─────────────── */
+/* â”€â”€â”€ Render: Latest Articles (Left Editorial Column) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function renderLatestArticles(articles) {
   const latest = getLatestArticles(articles, 2);
@@ -180,7 +180,7 @@ function renderLatestArticles(articles) {
   `).join('');
 }
 
-/* ─── Render: Popular Articles (Right Editorial Column) ──────────── */
+/* â”€â”€â”€ Render: Popular Articles (Right Editorial Column) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function renderPopularArticles(articles) {
   const popular = getPopularArticles(articles, 3);
@@ -197,7 +197,7 @@ function renderPopularArticles(articles) {
          aria-label="Read: ${art.title}">
       ${art.coverImage ? `
         <img class="popular-thumb" src="${art.coverImage}" alt="${art.title}" loading="lazy" />
-      ` : '<div class="popular-thumb" style="display:flex;align-items:center;justify-content:center;background:var(--surface);">📄</div>'}
+      ` : '<div class="popular-thumb" style="display:flex;align-items:center;justify-content:center;background:var(--surface);">ðŸ“„</div>'}
       <div>
         <p class="popular-title">${art.title}</p>
         <span class="popular-date">${formatDate(art.publishDate)}</span>
@@ -206,7 +206,7 @@ function renderPopularArticles(articles) {
   `).join('');
 }
 
-/* ─── Render: Article Grid (Learning Resources Section) ─────────── */
+/* â”€â”€â”€ Render: Article Grid (Learning Resources Section) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function renderArticleGrid(articles) {
   const el = document.getElementById('article-grid');
@@ -245,7 +245,7 @@ function renderArticleGrid(articles) {
   `).join('');
 }
 
-/* ─── Topic Filter Chips ──────────────────────────────────────────── */
+/* â”€â”€â”€ Topic Filter Chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function buildTopicCounts(articles) {
   const counts = { All: articles.length };
@@ -297,7 +297,7 @@ function setupTopicFilter(articles) {
   });
 }
 
-/* ─── Article Modal Reader ────────────────────────────────────────── */
+/* â”€â”€â”€ Article Modal Reader â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 let currentActiveArticles = [];
 
@@ -324,7 +324,7 @@ function openModal(articleId) {
     metaEl.innerHTML = `
       <span class="cat ${article.catClass || 'cat-algebra'}">${article.category}</span>
       <span class="meta-dot"></span>
-      <span style="font-size:0.8rem; color:var(--text-3);">${formatDate(article.publishDate)} · ${article.readingTime || '5 min read'} · By ${article.author || 'Mrs. Sarah Mitchell'}</span>
+      <span style="font-size:0.8rem; color:var(--text-3);">${formatDate(article.publishDate)} Â· ${article.readingTime || '5 min read'} Â· By ${article.author || 'Bu Khusnul Khotimah'}</span>
     `;
   }
 
@@ -378,7 +378,7 @@ function setupReadTriggers() {
   });
 }
 
-/* ─── Contact Form ────────────────────────────────────────────────── */
+/* â”€â”€â”€ Contact Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function setupContactForm() {
   const form = document.getElementById('contact-form');
@@ -399,7 +399,7 @@ function setupContactForm() {
   });
 }
 
-/* ─── Toast ───────────────────────────────────────────────────────── */
+/* â”€â”€â”€ Toast â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function showToast(msg) {
   const toast = document.getElementById('toast');
@@ -409,7 +409,7 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
-/* ─── Mobile Navigation ───────────────────────────────────────────── */
+/* â”€â”€â”€ Mobile Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function setupMobileNav() {
   const btn   = document.getElementById('nav-mobile-btn');
@@ -423,7 +423,7 @@ function setupMobileNav() {
   });
 }
 
-/* ─── Smooth Scroll ───────────────────────────────────────────────── */
+/* â”€â”€â”€ Smooth Scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function setupSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -439,7 +439,7 @@ function setupSmoothScroll() {
   });
 }
 
-/* ─── Synchronize Page Data ────────────────────────────────────────── */
+/* â”€â”€â”€ Synchronize Page Data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function refreshPageContent() {
   const publishedArticles = getPublishedArticles();
@@ -453,7 +453,7 @@ function refreshPageContent() {
   setupTopicFilter(publishedArticles);
 }
 
-/* ─── ScrollSpy & Header Shadow ───────────────────────────────────── */
+/* â”€â”€â”€ ScrollSpy & Header Shadow â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function setupScrollSpyAndHeader() {
   const header = document.querySelector('.site-header');
@@ -487,7 +487,7 @@ function setupScrollSpyAndHeader() {
   });
 }
 
-/* ─── Init ────────────────────────────────────────────────────────── */
+/* â”€â”€â”€ Init â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 document.addEventListener('DOMContentLoaded', () => {
   refreshPageContent();
